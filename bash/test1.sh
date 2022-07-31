@@ -6,3 +6,4 @@
 # -u -> exit on unset variables
 # -x -> prints out command before execution
 set -euo pipefail
+set -Euox pipefail
