@@ -1,0 +1,89 @@
+# Key Value Pairs:
+app: user-authentication
+#or
+app: "user-athentication"
+#or
+app: 'user-authentication'
+port: 9000
+version: 1.7
+income: null
+
+# Object with attributes
+microservice
+  name: testservice
+  version: 2
+  port: 9999
+
+# List of objects (with nested list, note different line allinments)
+microservices:
+  - app: webui
+    port: 9889
+    deployed: true 
+    developers:
+    - andre
+    - markus
+  - app: api
+    port: 1234
+    versions: 
+      - 1.3
+      - 1.8
+      - 2.0
+  - app: test
+    port: 5555
+    versions: ["latest", 2.0, 2.1]
+  - {app: test, port: 8080, versions: [1.3, 1.8,2.9]}
+
+# List of simple values:
+simplevalues:
+ - Andre
+ - Theo
+ - Karl    
+
+# Multiline Strings
+multiLineString: |
+   this is the first line
+   second line
+   third line
+# instead of
+multiLineString: "this is the first line \n second line \n"
+
+# Singleline String
+singleLineString: >
+  This should be
+  all on
+  a single line
+
+#Using Envvars:
+command:
+  - /bin/sh
+  - -ec
+  - >-
+    mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD -e 'SELECT 1'
+
+# Placeholders
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.map }}
+spec:
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}  
+      targetPort: {{ .Values.service.targetPort }}
+
+# Seperation of components:
+---
+
+# Date Time
+service: 
+  name test
+  releaseDate: 2021-09-30 13:35:00
+
+# Refereces, decalre with & use with *
+thing:
+  car:
+     type: pkw
+     price: &price 15999
+
+payment: *price
+
